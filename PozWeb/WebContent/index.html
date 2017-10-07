@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="ISO-8859-1">
+<title>Poz Web</title>
+</head>
+<body>
+<h1>Poz Web</h1>
+
+<br>
+<textarea id="url" rows="1" cols="50">http://google.com</textarea>
+<br>
+<button onclick="test()">Call GET</button>
+<br>
+<br>
+<textarea id="response" rows="10" cols="90"></textarea>
+
+<br><br>
+make a query to collection <textarea id="url" rows="1" cols="50">heartcamera</textarea>:<br>
+<textarea id="query" rows="10" cols="90"></textarea>
+<br>query response:<br>
+<textarea id="query_response" rows="10" cols="90"></textarea>
+	<script src="js/jquery.min.js"></script>
+	<!-- <script src="../js/bootstrap.min.js"></script>
+	
+	<script src="../js/moment.min.js"></script>
+	
+	<script src="../js/hc/highstock.src.js"></script>
+	<script src="../js/hc/highcharts-more.src.js"></script>
+	
+	<script src="../js/e4e.js"></script>
+	<script src="../js/gr.js"></script>
+	<script src="../js/util.js"></script>
+	
+	<script src="../js/json2.js"></script>
+	<script src="../js/cs.js"></script>
+	
+	<script type="text/javascript"> -->
+
+<script>
+
+function test() {
+	$.get( "proxy?url=" + $('#url').val(), processTest);
+}
+
+function processTest(response) {
+	//alert(response);
+	$('#response').val(response)
+}
+
+</script>
+
+
+</body>
+</html>

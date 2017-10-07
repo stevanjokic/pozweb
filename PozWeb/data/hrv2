@@ -1,0 +1,21 @@
+{
+    "_id": "57c5d695e4b0c1f5437d2463",
+    "user": "s1",
+    "time": "08/30/2016 20:54:25",
+    "code": "stevan",
+    "activity": "Resting",
+    "app_uuid": "fc80bfc1-5726-4816-afb1-9798a106a7b7",
+    "ts": 1472583265772,
+    "duration": 31,
+    "happiness": 5,
+    "hr": 69,
+    "SI": 161,
+    "pnn50": 10,
+    "rmssd": 29,
+    "rrAvg": 866,
+    "sdsd": 29,
+    "std": 29,
+    "SD2": 36,
+    "TINN": 120,
+    "SD1": 20
+  }

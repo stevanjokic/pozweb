@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+
+		<title>Query Big Data</title>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/plotly-latest.min.js"></script>
+
+		<style type="text/css" media="screen">
+			html, body, #fullheight {
+				min-height: 95% !important;
+				height: 95%;
+			}
+
+			.wrap {
+				width: 100%;
+				height: 100%;
+				overflow: auo;
+			}
+
+			.fleft {
+				float: left;
+				width: 50%;
+				height: 100%;
+			}
+
+			.fright {
+				float: right;
+				height: 100%;
+				width: 50%;
+				background: grey;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<div class="wrap">
+			<div class="fleft">
+				<p class="formfield">
+					<label for="dbtxt">db</label>
+					<textarea id="dbtxt" rows="1" cols="3">sj</textarea>
+					<label for="collectiontxt">collection</label>
+					<textarea id="collectiontxt" rows="1">heartcamera</textarea>
+					<label for="offsettxt">offset</label>
+					<textarea id="offsettxt" rows="1" cols="3">0</textarea>
+					<label for="limittxt">limit</label>
+					<textarea id="limittxt" rows="1" cols="3">100</textarea>
+					<button onclick="queryF()">
+					Query
+				</button>
+				</p>
+
+				<label for="query">query</label>
+				<br>
+				<textarea id="query"  style="width:90%;height:15%;">{}</textarea>																				
+
+ <br>
+				<label for="show">show</label>
+				<br>
+				<textarea id="show" style="width:90%;height:5%;">{HR:1, STD:1, rMSSD:1, time:1, activity:1, ts:1 }</textarea>																				
+
+					<label for="response">response</label>
+					<br>
+					<textarea id="response" style="width:90%;height:60%;"></textarea>
+				
+			</div>
+
+			<div class="fright">
+				<div id="tester" style="width:100%;height:100%;"></div>
+			</div>
+
+		</div>
+
+		<script type="text/javascript" charset="utf-8">
+			
+
+			function queryF() {
+				
+				// graph
+			var hr = {
+				x : [],
+				y : [],
+				name : 'HR',
+				type : 'scatter'
+			};
+			var std = {
+				x : [],
+				y : [],
+				name : 'STD',
+				yaxis : 'y2',
+				type : 'scatter'
+			};
+			var rmssd = {
+				x : [],
+				y : [],
+				name : 'rMSSD',
+				yaxis : 'y2',
+				type : 'scatter'
+			};
+
+			var data = [hr, std, rmssd];
+
+			var layout = {
+				title : 'HR HRV Graph',
+				yaxis : {
+					title : 'BPM',
+					zeroline : false
+				},
+				yaxis2 : {
+					title : 'ms',
+					titlefont : {
+						color : 'rgb(148, 103, 189)'
+					},
+					tickfont : {
+						color : 'rgb(148, 103, 189)'
+					},
+					zeroline : false,
+					overlaying : 'y',
+					side : 'right'
+				}
+			};
+
+				var jsonData = $.ajax({
+					url : 'srv/mongodb/query/' + $('textarea#dbtxt').val() + '/' + $('textarea#collectiontxt').val() + '/?sort=asc&pretty=false&query=' + encodeURIComponent($('#query').val()) + '&fields=' + encodeURIComponent($('#show').val()) 
+					+ '&offset=' + $('textarea#offsettxt').val() + '&limit=' + $('textarea#limittxt').val(),
+					dataType : 'json',
+				}).done(function(results) {
+
+					// console.log('resp: ' + results);
+
+					$("textarea#response").text(JSON.stringify(results, null, 2));
+
+					results.forEach(function(packet) {
+	
+						console.log('resp: ' + packet);					
+	
+						if (packet.ts > 1451682075000 && packet.HR > 30 && packet.HR < 180 && packet.STD < 200 && packet.rMSSD < 200 && packet.rMSSD>1 && packet.STD>2) {
+							hr.x.push(new Date(packet.ts));
+							hr.y.push(parseInt(packet.HR));
+
+							std.x.push(new Date(packet.ts));
+							std.y.push(parseInt(packet.STD));
+
+							rmssd.x.push(new Date(packet.ts));
+							rmssd.y.push(parseInt(packet.rMSSD));
+						}
+
+					});
+
+					Plotly.purge('tester');
+					Plotly.plot('tester', data, layout);
+
+				});
+
+			}
+
+		</script>
+
+	</body>
+</html>

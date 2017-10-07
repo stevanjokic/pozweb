@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>PozWeb</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<servlet>
+		<description></description>
+		<display-name>ProxyServlet</display-name>
+		<servlet-name>ProxyServlet</servlet-name>
+		<servlet-class>servlet.ProxyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProxyServlet</servlet-name>
+		<url-pattern>/proxy</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>MongoDBHandler</display-name>
+		<servlet-name>MongoDBHandler</servlet-name>
+		<servlet-class>servlet.MongoDBHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MongoDBHandler</servlet-name>
+		<url-pattern>/mongodb</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ServletAdaptor</servlet-name>
+		<servlet-class>com.sun.jersey.server.impl.container.servlet.ServletAdaptor</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>restservice</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletAdaptor</servlet-name>
+		<url-pattern>/srv/*</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description></description>
+		<display-name>ServiceServlet</display-name>
+		<servlet-name>ServiceServlet</servlet-name>
+		<servlet-class>servlet.ServiceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServiceServlet</servlet-name>
+		<url-pattern>/srvservlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- comment localhost hostIP for deploy -->
+	<!--  <env-entry>
+		<env-entry-name>hostIP</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>127.0.0.1</env-entry-value>
+	</env-entry> -->         
+	
+	<!-- uncomment for for deploy -->
+ 	<env-entry>
+		<env-entry-name>hostIP</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>127.11.10.4</env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>us</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>admin</env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>pwd</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>7vgqwA73-SGn</env-entry-value>
+	</env-entry>   
+
+</web-app>

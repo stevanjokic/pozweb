@@ -1,0 +1,21 @@
+{
+    "_id": "57c6ae0ee4b0624fbddd86c1",
+    "user": "s1",
+    "time": "08/31/2016 12:13:57",
+    "code": "stevan",
+    "activity": "Work, low activity",
+    "app_uuid": "38277a01-4d3e-464c-b335-cb916be5adcb",
+    "ts": 1472638437449,
+    "duration": 28,
+    "happiness": 5,
+    "hr": 81,
+    "SI": 225,
+    "pnn50": 0,
+    "rmssd": 19,
+    "rrAvg": 732,
+    "sdsd": 19,
+    "std": 16,
+    "SD2": 19,
+    "TINN": 100,
+    "SD1": 13
+  }

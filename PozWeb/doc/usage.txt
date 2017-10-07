@@ -1,0 +1,43 @@
+usage: 
+
+mongod --dbpath=C:\mongodb-win32-i386-2.0.7\datar\
+
+DB
+
+/mongodb/get/{db}/{collection}/ 
+list all items in the collection, URL parameters: limit, offset, pretty:true/false, sort:asc/desc (by _id) 
+
+/mongodb/get/{db}/{collection}/{id} 
+get item by ID, URL param pretty:true/false 
+
+/mongodb/post/{db}/{collection}/ 
+post JSON, return stored document ID 
+
+/mongodb/delete/{db}/{collection}/{id} 
+delete document by id 
+
+/mongodb/put/{db}/{collection}/{id} 
+update document by id, or create if id does not exist 
+
+/mongodb/query/{db}/{collection}/ 
+post query, URL parameters: limit, offset, pretty:true/false, sort:asc/desc (by _id)
+
+Proxy
+/proxy?url=...url..with..protocol... like http://google.com
+
+	<env-entry-name>hostIP</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>127.11.10.4</env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>us</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>admin</env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>pwd</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>7vgqwA73-SGn</env-entry-value>
+	</env-entry>
+	
+C:\mongodb-win32-i386-2.0.7\bin>mongod --dbpath=C:\mongodb-win32-i386-2.0.7\datar\	

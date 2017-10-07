@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html style="min-height: 100%; height:100%;">
+	<head>
+		<meta charset="ISO-8859-1">
+
+		<title>Visualization</title>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/plotly-latest.min.js"></script>
+		
+		<link rel="stylesheet" href="css/style.css">
+
+	</head>
+	<body>
+		
+		<div id="tester" style="width:100%;height:100%;"></div>
+		
+		<script type="text/javascript" charset="utf-8">
+			var hr = {
+				x : [],
+				y : [],
+				name : 'HR',
+				type : 'scatter'
+			};
+			var std = {
+				x : [],
+				y : [],
+				name : 'STD',
+				yaxis: 'y2',
+				type : 'scatter'
+			};
+			var rmssd = {
+				x : [],
+				y : [],
+				name : 'rMSSD',
+				yaxis: 'y2',
+				type : 'scatter'
+			};
+
+			var data = [hr, std, rmssd];
+
+			var jsonData = $.ajax({
+				url : 'srv/mongodb/get/sj/heartcamera/?sort=desc&pretty=true&limit=1000',
+				dataType : 'json',
+			}).done(function(results) {
+
+				results.forEach(function(packet) {
+
+				if(packet.ts>100000 && packet.HR>30 && packet.HR<180 && packet.STD<200 && packet.rMSSD<200) {
+						hr.x.push(new Date(packet.ts));
+						hr.y.push(parseInt(packet.HR));
+				
+						std.x.push(new Date(packet.ts));
+						std.y.push(parseInt(packet.STD));
+				
+						rmssd.x.push(new Date(packet.ts));
+						rmssd.y.push(parseInt(packet.rMSSD));
+						}
+
+				});
+
+				var layout = {
+					title : 'HR HRV Graph',
+					yaxis : {
+						title : 'BPM',
+						zeroline: false
+					},
+					yaxis2 : {
+						title : 'ms',
+						titlefont : {
+							color : 'rgb(148, 103, 189)'
+						},
+						tickfont : {
+							color : 'rgb(148, 103, 189)'
+						},
+						zeroline: false,
+						overlaying : 'y',
+						side : 'right'
+					}
+				};
+
+				
+				Plotly.plot('tester', data, layout);
+
+			});
+
+			console.log(Plotly.BUILD);
+
+
+		</script>
+
+	</body>
+</html>
