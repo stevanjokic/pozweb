@@ -73,7 +73,7 @@
  	<env-entry>
 		<env-entry-name>hostIP</env-entry-name>
 		<env-entry-type>java.lang.String</env-entry-type>
-		<env-entry-value>127.11.10.4</env-entry-value>
+		<env-entry-value>172.30.24.245</env-entry-value>
 	</env-entry>
 	<env-entry>
 		<env-entry-name>us</env-entry-name>
@@ -83,7 +83,7 @@
 	<env-entry>
 		<env-entry-name>pwd</env-entry-name>
 		<env-entry-type>java.lang.String</env-entry-type>
-		<env-entry-value>7vgqwA73-SGn</env-entry-value>
+		<env-entry-value>v1xFfu051V50Gr2B</env-entry-value>
 	</env-entry>   
 
 </web-app>
